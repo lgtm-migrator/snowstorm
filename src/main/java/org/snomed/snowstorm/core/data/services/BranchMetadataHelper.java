@@ -69,6 +69,14 @@ public class BranchMetadataHelper {
 		return (Map<String, Set<String>>) commit.getBranch().getMetadata().getAsMap().computeIfAbsent(key, k -> new HashMap<String, Set<String>>());
 	}
 
+	public static void setRebaseDuplicatesRemoved(Commit commit, Class<?> clazz, Set<String> duplicateComponentIds) {
+		if (commit == null || clazz == null || duplicateComponentIds == null || duplicateComponentIds.isEmpty()) {
+			return;
+		}
+
+		getRebaseDuplicatesRemoved(commit).computeIfAbsent(clazz.getSimpleName(), v -> new HashSet<>()).addAll(duplicateComponentIds);
+	}
+
 	private static boolean isTrue(String value) {
 		return "true".equals(value);
 	}
