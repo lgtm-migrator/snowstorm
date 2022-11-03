@@ -396,7 +396,7 @@ public class BranchMergeService {
 			ElasticsearchRepository repository = domainEntityConfiguration.getComponentTypeRepositoryMap().get(componentClass);
 			logger.info("Taking parent version of {} {}s on {}", duplicateComponents.size(), componentClass.getSimpleName(), path);
 			versionControlHelper.endOldVersionsOnThisBranch(componentClass, duplicateComponents, idField, clause, commit, repository);
-			BranchMetadataHelper.getRebaseDuplicatesRemoved(commit).put(componentClass.getSimpleName(), duplicateComponents);
+			BranchMetadataHelper.setRebaseDuplicatesRemoved(commit, componentClass, duplicateComponents);
 		}
 	}
 
